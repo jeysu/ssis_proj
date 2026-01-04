@@ -5,9 +5,11 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-sm">
+        <div class="card shadow">
             <div class="card-header bg-success text-white">
-                <h3 class="mb-0">Add New Program</h3>
+                <h3 class="mb-0">
+                    <i class="bi bi-plus-circle me-2"></i>Add New Program
+                </h3>
             </div>
             <div class="card-body">
                 <form method="POST">
@@ -36,7 +38,7 @@
                     <div class="mb-3">
                         <label for="college_code" class="form-label fw-bold">College *</label>
                         <select class="form-select" id="college_code" name="college_code" required>
-                            <option value="">-- Select College --</option>
+                            <option value="">--</option>
                             {% for college in colleges %}
                             <option value="{{ college[0] }}">{{ college[1] }}</option>
                             {% endfor %}
@@ -45,10 +47,10 @@
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('program.index') }}" class="btn btn-secondary">
-                            Cancel
+                            <i class="bi bi-arrow-left me-1"></i>Cancel
                         </a>
                         <button type="submit" class="btn btn-success">
-                            ✅ Add Program
+                            <i class="bi bi-check-circle me-1"></i>Add Program
                         </button>
                     </div>
                 </form>
