@@ -44,7 +44,7 @@
             {% if programs %}
                 {% for program in programs %}
                 <tr class="border-bottom border-light">
-                    <td class="fw-medium" style="word-wrap: break-word; max-width: 0;"><span class="badge bg-primary">{{ program[0] }}</span></td>
+                    <td class="fw-medium" style="word-wrap: break-word; max-width: 0;">{{ program[0] }}</td>
                     <td style="word-wrap: break-word; max-width: 0;">{{ program[1] }}</td>
                     <td style="word-wrap: break-word; max-width: 0;">{{ program[3] if program|length > 3 and program[3] else program[2] }}</td>
                     <td>
