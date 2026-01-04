@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-primary">Student Information System</h1>
+    <p class="lead text-muted">Manage students, programs, and colleges efficiently</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <span class="display-1">👨‍🎓</span>
+                </div>
+                <h5 class="card-title fw-bold">Students</h5>
+                <p class="card-text text-muted">Manage student records and information</p>
+                <a href="{{ url_for('student.index') }}" class="btn btn-primary">View Students</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <span class="display-1">📖</span>
+                </div>
+                <h5 class="card-title fw-bold">Programs</h5>
+                <p class="card-text text-muted">Manage academic programs and courses</p>
+                <a href="{{ url_for('program.index') }}" class="btn btn-primary">View Programs</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <span class="display-1">🏛️</span>
+                </div>
+                <h5 class="card-title fw-bold">Colleges</h5>
+                <p class="card-text text-muted">Manage college departments</p>
+                <a href="{{ url_for('college.index') }}" class="btn btn-primary">View Colleges</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

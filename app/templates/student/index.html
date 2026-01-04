@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Students - SSIS{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Students</h2>
+    <a href="{{ url_for('student.add') }}" class="btn btn-success">
+        ➕ Add New Student
+    </a>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form method="GET" class="d-flex">
+            <input type="text" name="search" class="form-control me-2" 
+                   placeholder="Search by ID, name, or program..." 
+                   value="{{ search }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if search %}
+            <a href="{{ url_for('student.index') }}" class="btn btn-secondary ms-2">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Photo</th>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Program</th>
+                <th>Year</th>
+                <th>Gender</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if students %}
+                {% for student in students %}
+                <tr>
+                    <td>
+                        {% if student|length > 6 and student[6] %}
+                        <img src="{{ student[6] }}" alt="Photo" class="img-thumbnail" style="max-width: 50px; max-height: 50px;">
+                        {% else %}
+                        <span class="text-muted">No photo</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[7] if student|length > 7 and student[7] else student[3] }}</td>
+                    <td>{{ student[4] }}</td>
+                    <td>{{ student[5] }}</td>
+                    <td>
+                        <a href="{{ url_for('student.edit', student_id=student[0]) }}" 
+                           class="btn btn-sm btn-warning">✏️ Edit</a>
+                        <a href="{{ url_for('student.delete', student_id=student[0]) }}" 
+                           class="btn btn-sm btn-danger" 
+                           onclick="return confirm('Are you sure you want to delete this student?')">
+                           🗑️ Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="8" class="text-center text-muted">
+                        No students found. {% if search %}Try a different search.{% else %}Add your first student!{% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Add College - SSIS{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0">Add New College</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="code" class="form-label fw-bold">College Code *</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="code" 
+                               name="code" 
+                               placeholder="e.g., CCS, CBA, COE"
+                               maxlength="10"
+                               required>
+                        <div class="form-text">Short code for the college (max 10 characters)</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-bold">College Name *</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="name" 
+                               name="name" 
+                               placeholder="e.g., College of Computer Studies"
+                               required>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('college.index') }}" class="btn btn-secondary">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            ✅ Add College
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

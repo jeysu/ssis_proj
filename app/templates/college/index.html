@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Colleges - SSIS{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Colleges</h2>
+    <a href="{{ url_for('college.add') }}" class="btn btn-success">
+        ➕ Add New College
+    </a>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form method="GET" class="d-flex">
+            <input type="text" name="search" class="form-control me-2" 
+                   placeholder="Search by code or name..." 
+                   value="{{ search }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if search %}
+            <a href="{{ url_for('college.index') }}" class="btn btn-secondary ms-2">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>College Code</th>
+                <th>College Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if colleges %}
+                {% for college in colleges %}
+                <tr>
+                    <td><span class="badge bg-info text-dark">{{ college[0] }}</span></td>
+                    <td>{{ college[1] }}</td>
+                    <td>
+                        <a href="{{ url_for('college.edit', code=college[0]) }}" 
+                           class="btn btn-sm btn-warning">✏️ Edit</a>
+                        <a href="{{ url_for('college.delete', code=college[0]) }}" 
+                           class="btn btn-sm btn-danger" 
+                           onclick="return confirm('Are you sure you want to delete this college? This will affect all programs and students under this college.')">
+                           🗑️ Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">
+                        No colleges found. {% if search %}Try a different search.{% else %}Add your first college!{% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

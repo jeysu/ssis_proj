@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Edit College - SSIS{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning">
+                <h3 class="mb-0">Edit College</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="code" class="form-label fw-bold">College Code</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="code" 
+                               value="{{ college[0] }}" 
+                               disabled>
+                        <div class="form-text">College code cannot be changed</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-bold">College Name *</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="name" 
+                               name="name" 
+                               value="{{ college[1] }}" 
+                               required>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('college.index') }}" class="btn btn-secondary">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-warning">
+                            💾 Update College
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
