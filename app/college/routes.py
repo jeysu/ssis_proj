@@ -5,8 +5,24 @@ from app.models import College
 @college_bp.route('/')
 def index():
     search = request.args.get('search', '')
-    colleges = College.get_all(search)
-    return render_template('college/index.html', colleges=colleges, search=search)
+    page = int(request.args.get('page', 1))
+    per_page = 7
+    
+    # Get all colleges for counting total
+    all_colleges = College.get_all(search)
+    total_colleges = len(all_colleges)
+    total_pages = (total_colleges + per_page - 1) // per_page
+    
+    # Calculate offset and slice the colleges
+    offset = (page - 1) * per_page
+    colleges = all_colleges[offset:offset + per_page]
+    
+    return render_template('college/index.html', 
+                         colleges=colleges, 
+                         search=search,
+                         page=page,
+                         total_pages=total_pages,
+                         total_colleges=total_colleges)
 
 @college_bp.route('/add', methods=['GET', 'POST'])
 def add():

@@ -5,8 +5,24 @@ from app.models import Program, College
 @program_bp.route('/')
 def index():
     search = request.args.get('search', '')
-    programs = Program.get_all(search)
-    return render_template('program/index.html', programs=programs, search=search)
+    page = int(request.args.get('page', 1))
+    per_page = 7
+    
+    # Get all programs for counting total
+    all_programs = Program.get_all(search)
+    total_programs = len(all_programs)
+    total_pages = (total_programs + per_page - 1) // per_page
+    
+    # Calculate offset and slice the programs
+    offset = (page - 1) * per_page
+    programs = all_programs[offset:offset + per_page]
+    
+    return render_template('program/index.html', 
+                         programs=programs, 
+                         search=search,
+                         page=page,
+                         total_pages=total_pages,
+                         total_programs=total_programs)
 
 @program_bp.route('/add', methods=['GET', 'POST'])
 def add():
