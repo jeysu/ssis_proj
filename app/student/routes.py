@@ -7,8 +7,24 @@ import os
 @student_bp.route('/')
 def index():
     search = request.args.get('search', '')
-    students = Student.get_all(search)
-    return render_template('student/index.html', students=students, search=search)
+    page = int(request.args.get('page', 1))
+    per_page = 10
+    
+    # Get all students for counting total
+    all_students = Student.get_all(search)
+    total_students = len(all_students)
+    total_pages = (total_students + per_page - 1) // per_page
+    
+    # Calculate offset and slice the students
+    offset = (page - 1) * per_page
+    students = all_students[offset:offset + per_page]
+    
+    return render_template('student/index.html', 
+                         students=students, 
+                         search=search,
+                         page=page,
+                         total_pages=total_pages,
+                         total_students=total_students)
 
 @student_bp.route('/add', methods=['GET', 'POST'])
 def add():
