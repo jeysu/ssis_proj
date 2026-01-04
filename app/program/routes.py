@@ -14,7 +14,7 @@ def add():
         data = {
             'code': request.form['code'],
             'name': request.form['name'],
-            'college_code': request.form['college_code']  # Changed
+            'college_code': request.form['college_code']
         }
         try:
             Program.create(data)
@@ -31,7 +31,7 @@ def edit(code):
     if request.method == 'POST':
         data = {
             'name': request.form['name'],
-            'college_code': request.form['college_code']  # Changed
+            'college_code': request.form['college_code']
         }
         try:
             Program.update(code, data)

@@ -18,7 +18,6 @@ def add():
             photo = request.files['photo']
             if photo.filename != '':
                 try:
-                    # Upload to Cloudinary
                     upload_result = cloudinary.uploader.upload(photo)
                     photo_url = upload_result['secure_url']
                 except Exception as e:
@@ -52,7 +51,6 @@ def edit(student_id):
             photo = request.files['photo']
             if photo.filename != '':
                 try:
-                    # Upload to Cloudinary
                     upload_result = cloudinary.uploader.upload(photo)
                     photo_url = upload_result['secure_url']
                 except Exception as e:
