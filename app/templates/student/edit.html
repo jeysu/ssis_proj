@@ -5,9 +5,11 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-sm">
+        <div class="card shadow">
             <div class="card-header bg-warning">
-                <h3 class="mb-0">Edit Student</h3>
+                <h3 class="mb-0">
+                    <i class="bi bi-pencil-square me-2"></i>Edit Student
+                </h3>
             </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
@@ -58,13 +60,13 @@
                                id="photo" 
                                name="photo" 
                                accept="image/*">
-                        <div class="form-text">Upload a new photo to replace the current one (optional)</div>
+                        <div class="form-text">Upload a new photo (optional)</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="course_code" class="form-label fw-bold">Program *</label>
                         <select class="form-select" id="course_code" name="course_code" required>
-                            <option value="">-- Select Program --</option>
+                            <option value="">--</option>
                             {% for program in programs %}
                             <option value="{{ program[0] }}" 
                                     {% if program[0] == student[3] %}selected{% endif %}>
@@ -98,10 +100,10 @@
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('student.index') }}" class="btn btn-secondary">
-                            Cancel
+                            <i class="bi bi-arrow-left me-1"></i>Cancel
                         </a>
                         <button type="submit" class="btn btn-warning">
-                            💾 Update Student
+                            <i class="bi bi-save me-1"></i>Update Student
                         </button>
                     </div>
                 </form>

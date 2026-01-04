@@ -20,8 +20,9 @@
                                id="id" 
                                name="id" 
                                pattern="\d{4}-\d{4}" 
-                               placeholder="YYYY-NNNN (e.g., 2024-0001)"
+                               placeholder="YYYY-NNNN"
                                required>
+                        <div class="form-text">ID must be formatted</div>
                     </div>
                     
                     <div class="row">
@@ -30,7 +31,8 @@
                             <input type="text" 
                                    class="form-control" 
                                    id="firstname" 
-                                   name="firstname" 
+                                   name="firstname"
+                                   placeholder="Juan" 
                                    required>
                         </div>
                         
@@ -40,6 +42,7 @@
                                    class="form-control" 
                                    id="lastname" 
                                    name="lastname" 
+                                   placeholder="Dela Cruz"
                                    required>
                         </div>
                     </div>
@@ -51,6 +54,7 @@
                                id="photo" 
                                name="photo" 
                                accept="image/*">
+                        <div class="form-text">Upload a photo (optional)</div>
                     </div>
                     
                     <div class="mb-3">
