@@ -8,7 +8,7 @@ import os
 def index():
     search = request.args.get('search', '')
     page = int(request.args.get('page', 1))
-    per_page = 10
+    per_page = 7
     
     # Get all students for counting total
     all_students = Student.get_all(search)
