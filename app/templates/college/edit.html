@@ -5,9 +5,11 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-sm">
+        <div class="card shadow">
             <div class="card-header bg-warning">
-                <h3 class="mb-0">Edit College</h3>
+                <h3 class="mb-0">
+                    <i class="bi bi-pencil-square me-2"></i>Edit College
+                </h3>
             </div>
             <div class="card-body">
                 <form method="POST">
@@ -33,10 +35,10 @@
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('college.index') }}" class="btn btn-secondary">
-                            Cancel
+                            <i class="bi bi-arrow-left me-1"></i>Cancel
                         </a>
                         <button type="submit" class="btn btn-warning">
-                            💾 Update College
+                            <i class="bi bi-save me-1"></i>Update College
                         </button>
                     </div>
                 </form>

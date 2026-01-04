@@ -5,9 +5,11 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-sm">
+        <div class="card shadow">
             <div class="card-header bg-success text-white">
-                <h3 class="mb-0">Add New College</h3>
+                <h3 class="mb-0">
+                    <i class="bi bi-plus-circle me-2"></i>Add New College
+                </h3>
             </div>
             <div class="card-body">
                 <form method="POST">
@@ -20,7 +22,6 @@
                                placeholder="e.g., CCS, CBA, COE"
                                maxlength="10"
                                required>
-                        <div class="form-text">Short code for the college (max 10 characters)</div>
                     </div>
                     
                     <div class="mb-3">
@@ -35,10 +36,10 @@
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('college.index') }}" class="btn btn-secondary">
-                            Cancel
+                            <i class="bi bi-arrow-left me-1"></i>Cancel
                         </a>
                         <button type="submit" class="btn btn-success">
-                            ✅ Add College
+                            <i class="bi bi-check-circle me-1"></i>Add College
                         </button>
                     </div>
                 </form>
