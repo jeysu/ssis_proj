@@ -5,9 +5,11 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-sm">
+        <div class="card shadow">
             <div class="card-header bg-success text-white">
-                <h3 class="mb-0">Add New Student</h3>
+                <h3 class="mb-0">
+                    <i class="bi bi-plus-circle me-2"></i>Add New Student
+                </h3>
             </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
@@ -20,7 +22,6 @@
                                pattern="\d{4}-\d{4}" 
                                placeholder="YYYY-NNNN (e.g., 2024-0001)"
                                required>
-                        <div class="form-text">Format: YYYY-NNNN</div>
                     </div>
                     
                     <div class="row">
@@ -50,13 +51,12 @@
                                id="photo" 
                                name="photo" 
                                accept="image/*">
-                        <div class="form-text">Upload a photo for the student (optional)</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="course_code" class="form-label fw-bold">Program *</label>
                         <select class="form-select" id="course_code" name="course_code" required>
-                            <option value="">-- Select Program --</option>
+                            <option value="">--</option>
                             {% for program in programs %}
                             <option value="{{ program[0] }}">{{ program[1] }}</option>
                             {% endfor %}
@@ -67,7 +67,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="year" class="form-label fw-bold">Year Level *</label>
                             <select class="form-select" id="year" name="year" required>
-                                <option value="">-- Select Year --</option>
+                                <option value="">--</option>
                                 <option value="1">1st Year</option>
                                 <option value="2">2nd Year</option>
                                 <option value="3">3rd Year</option>
@@ -79,7 +79,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="gender" class="form-label fw-bold">Gender *</label>
                             <select class="form-select" id="gender" name="gender" required>
-                                <option value="">-- Select Gender --</option>
+                                <option value="">--</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
@@ -89,10 +89,10 @@
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('student.index') }}" class="btn btn-secondary">
-                            Cancel
+                            <i class="bi bi-arrow-left me-1"></i>Cancel
                         </a>
                         <button type="submit" class="btn btn-success">
-                            ✅ Add Student
+                            <i class="bi bi-check-circle me-1"></i>Add Student
                         </button>
                     </div>
                 </form>
