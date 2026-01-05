@@ -10,12 +10,10 @@ def index():
     page = int(request.args.get('page', 1))
     per_page = 7
     
-    # Get all students for counting total
     all_students = Student.get_all(search)
     total_students = len(all_students)
     total_pages = (total_students + per_page - 1) // per_page
     
-    # Calculate offset and slice the students
     offset = (page - 1) * per_page
     students = all_students[offset:offset + per_page]
     
