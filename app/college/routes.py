@@ -6,14 +6,14 @@ from app.models import College
 def index():
     search = request.args.get('search', '')
     page = int(request.args.get('page', 1))
+    sort_by = request.args.get('sort_by', 'code')
+    sort_order = request.args.get('sort_order', 'asc')
     per_page = 7
     
-    # Get all colleges for counting total
-    all_colleges = College.get_all(search)
+    all_colleges = College.get_all(search, sort_by, sort_order)
     total_colleges = len(all_colleges)
     total_pages = (total_colleges + per_page - 1) // per_page
     
-    # Calculate offset and slice the colleges
     offset = (page - 1) * per_page
     colleges = all_colleges[offset:offset + per_page]
     
@@ -22,7 +22,9 @@ def index():
                          search=search,
                          page=page,
                          total_pages=total_pages,
-                         total_colleges=total_colleges)
+                         total_colleges=total_colleges,
+                         sort_by=sort_by,
+                         sort_order=sort_order)
 
 @college_bp.route('/add', methods=['GET', 'POST'])
 def add():
