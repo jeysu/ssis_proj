@@ -35,12 +35,54 @@
                         <thead>
                             <tr>
                                 <th class="fw-semibold text-muted" style="width: 8%;">Photo</th>
-                                <th class="fw-semibold text-muted" style="width: 12%;">Student ID</th>
-                                <th class="fw-semibold text-muted" style="width: 15%;">First Name</th>
-                                <th class="fw-semibold text-muted" style="width: 15%;">Last Name</th>
-                                <th class="fw-semibold text-muted" style="width: 20%;">Program</th>
-                                <th class="fw-semibold text-muted" style="width: 10%;">Year</th>
-                                <th class="fw-semibold text-muted" style="width: 10%;">Gender</th>
+                                <th class="fw-semibold text-muted" style="width: 12%;">
+                                    <a href="{{ url_for('student.index', search=search, page=1, sort_by='id', sort_order='desc' if sort_by == 'id' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        Student ID
+                                        {% if sort_by == 'id' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
+                                <th class="fw-semibold text-muted" style="width: 15%;">
+                                    <a href="{{ url_for('student.index', search=search, page=1, sort_by='firstname', sort_order='desc' if sort_by == 'firstname' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        First Name
+                                        {% if sort_by == 'firstname' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
+                                <th class="fw-semibold text-muted" style="width: 15%;">
+                                    <a href="{{ url_for('student.index', search=search, page=1, sort_by='lastname', sort_order='desc' if sort_by == 'lastname' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        Last Name
+                                        {% if sort_by == 'lastname' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
+                                <th class="fw-semibold text-muted" style="width: 20%;">
+                                    <a href="{{ url_for('student.index', search=search, page=1, sort_by='program_name', sort_order='desc' if sort_by == 'program_name' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        Program
+                                        {% if sort_by == 'program_name' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
+                                <th class="fw-semibold text-muted" style="width: 10%;">
+                                    <a href="{{ url_for('student.index', search=search, page=1, sort_by='year', sort_order='desc' if sort_by == 'year' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        Year
+                                        {% if sort_by == 'year' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
+                                <th class="fw-semibold text-muted" style="width: 10%;">
+                                    <a href="{{ url_for('student.index', search=search, page=1, sort_by='gender', sort_order='desc' if sort_by == 'gender' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        Gender
+                                        {% if sort_by == 'gender' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
                                 <th class="fw-semibold text-muted" style="width: 10%;">Actions</th>
                             </tr>
                         </thead>
@@ -107,7 +149,7 @@
         <ul class="pagination">
             {% if page > 1 %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('student.index', page=page-1, search=search) }}" aria-label="Previous">
+                <a class="page-link" href="{{ url_for('student.index', page=page-1, search=search, sort_by=sort_by, sort_order=sort_order) }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -132,13 +174,13 @@
             
             {% for page_num in range(start_page, end_page + 1) %}
             <li class="page-item {% if page_num == page %}active{% endif %}">
-                <a class="page-link" href="{{ url_for('student.index', page=page_num, search=search) }}">{{ page_num }}</a>
+                <a class="page-link" href="{{ url_for('student.index', page=page_num, search=search, sort_by=sort_by, sort_order=sort_order) }}">{{ page_num }}</a>
             </li>
             {% endfor %}
 
             {% if page < total_pages %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('student.index', page=page+1, search=search) }}" aria-label="Next">
+                <a class="page-link" href="{{ url_for('student.index', page=page+1, search=search, sort_by=sort_by, sort_order=sort_order) }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

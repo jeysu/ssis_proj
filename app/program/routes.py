@@ -6,14 +6,14 @@ from app.models import Program, College
 def index():
     search = request.args.get('search', '')
     page = int(request.args.get('page', 1))
+    sort_by = request.args.get('sort_by', 'code')
+    sort_order = request.args.get('sort_order', 'asc')
     per_page = 7
     
-    # Get all programs for counting total
-    all_programs = Program.get_all(search)
+    all_programs = Program.get_all(search, sort_by, sort_order)
     total_programs = len(all_programs)
     total_pages = (total_programs + per_page - 1) // per_page
     
-    # Calculate offset and slice the programs
     offset = (page - 1) * per_page
     programs = all_programs[offset:offset + per_page]
     
@@ -22,7 +22,9 @@ def index():
                          search=search,
                          page=page,
                          total_pages=total_pages,
-                         total_programs=total_programs)
+                         total_programs=total_programs,
+                         sort_by=sort_by,
+                         sort_order=sort_order)
 
 @program_bp.route('/add', methods=['GET', 'POST'])
 def add():

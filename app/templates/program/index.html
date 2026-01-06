@@ -34,9 +34,30 @@
                     <table class="table table-hover align-middle" style="table-layout: fixed; width: 100%;">
                         <thead>
                             <tr>
-                                <th class="fw-semibold text-muted" style="width: 20%;">Program Code</th>
-                                <th class="fw-semibold text-muted" style="width: 35%;">Program Name</th>
-                                <th class="fw-semibold text-muted" style="width: 35%;">College</th>
+                                <th class="fw-semibold text-muted" style="width: 20%;">
+                                    <a href="{{ url_for('program.index', search=search, page=1, sort_by='code', sort_order='desc' if sort_by == 'code' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        Program Code
+                                        {% if sort_by == 'code' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
+                                <th class="fw-semibold text-muted" style="width: 35%;">
+                                    <a href="{{ url_for('program.index', search=search, page=1, sort_by='name', sort_order='desc' if sort_by == 'name' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        Program Name
+                                        {% if sort_by == 'name' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
+                                <th class="fw-semibold text-muted" style="width: 35%;">
+                                    <a href="{{ url_for('program.index', search=search, page=1, sort_by='college_name', sort_order='desc' if sort_by == 'college_name' and sort_order == 'asc' else 'asc') }}" class="text-decoration-none text-muted">
+                                        College
+                                        {% if sort_by == 'college_name' %}
+                                            <i class="bi bi-chevron-{{ 'up' if sort_order == 'asc' else 'down' }}"></i>
+                                        {% endif %}
+                                    </a>
+                                </th>
                                 <th class="fw-semibold text-muted" style="width: 10%;">Actions</th>
                             </tr>
                         </thead>
@@ -83,7 +104,7 @@
         <ul class="pagination">
             {% if page > 1 %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('program.index', page=page-1, search=search) }}" aria-label="Previous">
+                <a class="page-link" href="{{ url_for('program.index', page=page-1, search=search, sort_by=sort_by, sort_order=sort_order) }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -108,13 +129,13 @@
             
             {% for page_num in range(start_page, end_page + 1) %}
             <li class="page-item {% if page_num == page %}active{% endif %}">
-                <a class="page-link" href="{{ url_for('program.index', page=page_num, search=search) }}">{{ page_num }}</a>
+                <a class="page-link" href="{{ url_for('program.index', page=page_num, search=search, sort_by=sort_by, sort_order=sort_order) }}">{{ page_num }}</a>
             </li>
             {% endfor %}
 
             {% if page < total_pages %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('program.index', page=page+1, search=search) }}" aria-label="Next">
+                <a class="page-link" href="{{ url_for('program.index', page=page+1, search=search, sort_by=sort_by, sort_order=sort_order) }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

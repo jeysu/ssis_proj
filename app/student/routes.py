@@ -8,9 +8,11 @@ import os
 def index():
     search = request.args.get('search', '')
     page = int(request.args.get('page', 1))
+    sort_by = request.args.get('sort_by', 'id')
+    sort_order = request.args.get('sort_order', 'asc')
     per_page = 7
     
-    all_students = Student.get_all(search)
+    all_students = Student.get_all(search, sort_by, sort_order)
     total_students = len(all_students)
     total_pages = (total_students + per_page - 1) // per_page
     
@@ -22,7 +24,9 @@ def index():
                          search=search,
                          page=page,
                          total_pages=total_pages,
-                         total_students=total_students)
+                         total_students=total_students,
+                         sort_by=sort_by,
+                         sort_order=sort_order)
 
 @student_bp.route('/add', methods=['GET', 'POST'])
 def add():
